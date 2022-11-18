@@ -37,8 +37,9 @@ describe('top-secret users tests', () => {
       email,
     });
 
-    afterAll(() => {
-        pool.end();
-      });
-    });
   });
+
+  afterAll(() => {
+    pool.end();
+  });
+});
