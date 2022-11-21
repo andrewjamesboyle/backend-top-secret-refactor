@@ -46,16 +46,13 @@ describe('top-secret users tests', () => {
       .send({ title: 'secret title', description: 'secret description' });
     const resp = await agent.get('/api/v1/secrets');
     expect(resp.status).toEqual(200);
-    expect(resp.body).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "created_at": "2022-11-21T22:28:14.941Z",
-          "description": "secret description",
-          "id": "1",
-          "title": "secret title",
-        },
-      ]
-    `);
+    expect(resp.body).toEqual([{
+      created_at: expect.any(String),
+      description: 'secret description',
+      id: expect.any(String),
+      title: 'secret title',
+    }]
+    );
   });
 
   afterAll(() => {
