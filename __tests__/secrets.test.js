@@ -37,6 +37,12 @@ describe('top-secret users tests', () => {
     });
   });
 
+  it('gets a list of secrets', async () => {
+    const [agent] = await registerAndLogin();
+    const resp = await agent.get('/api/v1/secrets');
+    expect(resp.status).toEqual(200);
+  });
+
   afterAll(() => {
     pool.end();
   });
