@@ -28,25 +28,37 @@ describe('top-secret users tests', () => {
 
   it('creates a secret', async () => {
     const [agent] = await registerAndLogin();
-    const resp = await agent.post('/api/v1/secrets').send({ title: 'secret title', description: 'secret description' });
+    const resp = await agent
+      .post('/api/v1/secrets')
+      .send({ title: 'secret title', description: 'secret description' });
     expect(resp.body).toEqual({
       id: expect.any(String),
       title: 'secret title',
       description: 'secret description',
-      created_at: expect.any(String)
+      created_at: expect.any(String),
     });
   });
 
   it('gets a list of secrets', async () => {
     const [agent] = await registerAndLogin();
+    await agent
+      .post('/api/v1/secrets')
+      .send({ title: 'secret title', description: 'secret description' });
     const resp = await agent.get('/api/v1/secrets');
     expect(resp.status).toEqual(200);
+    expect(resp.body).toMatchInlineSnapshot(`
+      Array [
+        Object {
+          "created_at": "2022-11-21T20:37:16.948Z",
+          "description": "secret description",
+          "id": "1",
+          "title": "secret title",
+        },
+      ]
+    `);
   });
 
   afterAll(() => {
     pool.end();
   });
-
 });
-
-
