@@ -49,7 +49,7 @@ describe('top-secret users tests', () => {
     expect(resp.body).toMatchInlineSnapshot(`
       Array [
         Object {
-          "created_at": "2022-11-21T20:37:16.948Z",
+          "created_at": "2022-11-21T22:28:14.941Z",
           "description": "secret description",
           "id": "1",
           "title": "secret title",
